@@ -1,3 +1,4 @@
 /firebase/myAuth.py
 /thread/mnist
 /thread/my_model*
+/thread/*.pickle
