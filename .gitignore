@@ -4,3 +4,4 @@
 /thread/*.pickle
 /thread/*model*
 *.swp
+/.swp
