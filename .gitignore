@@ -2,3 +2,4 @@
 /thread/mnist
 /thread/my_model*
 /thread/*.pickle
+/thread/*model*
