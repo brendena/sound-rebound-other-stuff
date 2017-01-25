@@ -1,0 +1,38 @@
+button, label, input[type="submit"] {
+    font-family: 'Segoe UI', 'Open Sans', Arial, sans-serif;
+    display: block;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    text-align: center;
+    padding: 10px;
+    margin: 15px 0px 0px 15px;
+    font-size: 18px;
+    text-transform: uppercase;
+    background: #ff595c;
+    color: #FFF;
+    border: 0px none;
+    outline: 0px none;
+
+
+    float:left;
+}
+
+button:hover, label:hover,input[type="submit"]:hover{
+    background: #00ff00;
+}
+
+button:active, label:active,input[type="submit"]:active {
+    background: #F6A953;
+}
+
+input[type="radio"]{ 
+    display:none;
+} 
+input[type="radio"]:checked+label{ 
+    background: #00ff00; 
+} 
+
+input[type="submit"]{
+    height: inherit;
+    position: inherit;
+}

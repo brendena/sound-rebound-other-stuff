@@ -1,0 +1,43 @@
+body{
+    width:100%;
+    height:100%;
+}
+#completeContainer{
+    display:flex; 
+    align-items: center; 
+    justify-content: center;
+    flex-direction: column;
+    height:100%;
+    width:100%;
+    position:absolute;
+}
+
+
+
+#audioMenuContainer{
+    width:90%;
+    color:black;
+    height:40px;
+    border-style: solid;
+    border-width: 20px;
+    border-color: black;
+    margin: 0 auto;
+}
+
+#sliderContainer{
+    width:90%;
+    float:left;
+}
+
+#playButton{
+    width:5%;
+    float:left;
+}
+#volumeButton{
+    width:5%;
+    float:left;
+}
+
+audio{
+    display:none;
+}

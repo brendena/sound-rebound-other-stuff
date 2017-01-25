@@ -5,3 +5,6 @@
 /thread/*model*
 *.swp
 /.swp
+/visualizing/node_modules
+/visualizing/*.wav
+/visualizing/*.yml

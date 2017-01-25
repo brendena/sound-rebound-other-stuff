@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!-- HTML5 Hello world by kirupa - http://www.kirupa.com/html5/getting_your_feet_wet_html5_pg1.htm -->
+<html lang="en-us">
+
+<head>
+<meta charset="utf-8">
+<title>Hello...</title>
+<link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='./endingInputSlider.css') }}">
+<link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='./sliderContainer.css') }}">
+<link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='./startInputSlider.css') }}">
+<link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='./style.css') }}">
+<link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='./button.css') }}">
+<link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='./css/font-awesome.css') }}">
+</head>
+
+<body>
+<div id="completeContainer">
+  <div style="width:100%">
+    {% if name %}
+        <h1 style="text-align: center">{{name}}.wav</h1>
+
+    {% else %}
+      <h1  style="text-align: center">There was a problem</h1>
+    {% endif %}
+
+    <div id="audioMenuContainer">
+      <i id="playButton" class="fa-play fa-2" aria-hidden="true"></i>
+      <div id="sliderContainer">
+        <div id="colorBar">
+        </div>
+        <input class='type2' type="range" id="sliderEnd" min=0 max=1000 value="1000">
+        <input type="range" id="sliderStart" min=0 max=1000 value="0"> <!--this should be the first one so you can diretly select where the play headers going to start -->
+      </div>
+      <i id="volumeButton" class="fa-volume-up fa-2" aria-hidden="true"></i>
+    </div>
+  </div>
+  {% include 'button.html' %}
+</div>
+
+
+{% if name %}
+    <audio id="audio" src="./static/audio/{{name}}.wav" preload="auto"></audio>
+
+{% else %}
+  <h1>There was a problem</h1>
+{% endif %}
+
+<!-- 
+I can have multiple type of ranges if i specify it with a name specifiy
+Example
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 17px 0;
+}
+
+-->
+
+<!--
+<progress value="1534602" max="4603807">33%</progress>
+-->
+
+<script src="{{ url_for('static',filename='javascript.js') }}"></script>
+<script src="{{ url_for('static',filename='events.js') }}"></script>
+</body>
+</html>

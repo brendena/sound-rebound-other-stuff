@@ -1,0 +1,34 @@
+input{
+    position:absolute;
+    height: 0px;
+}
+
+#sliderStart {
+    left:-1px;
+    top:-9px;
+}
+
+#sliderEnd {
+    left:1px;
+}
+
+#sliderContainer{
+    position:relative; 
+    height:10px;
+}
+
+
+#colorBar{
+    position:absolute;
+    width:100%;
+    height:40px;
+}
+
+.fa-2{
+    font-size:35px;/* 35 font size == 40px height*/
+    font-style:normal;
+    text-align: center;
+    color:#D3D3D3;
+    background: black;
+}
+
