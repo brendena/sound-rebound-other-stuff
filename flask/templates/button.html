@@ -1,12 +1,13 @@
 <div style="width:100%">
 <form method="post">
-	<input type="radio" id="good" name="amount">
-	<label for="good">good</label>
+	<input type="radio" id="good" name="status" value="good">
+	<label for="good" class="labelToggleButton">good</label>
 
-	<input type="radio" id="bad" name="amount" checked="checked">
-	<label for="bad">bad</label>
+	<input type="radio" id="bad" name="status" value="bad" checked="checked">
+	<label for="bad" class="labelToggleButton">bad</label>
 
 	<button id="clipHere">Clip Here</button>
+	<input name="clippedSection" id="clippedSection" style="display:none">
 	<input type="submit" value="Submit" id="submit">
 </form>
 </div>

@@ -10,11 +10,52 @@
 <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='./startInputSlider.css') }}">
 <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='./style.css') }}">
 <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='./button.css') }}">
+<link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='./toggleButton.css') }}">
 <link type="text/css" rel="stylesheet" href="{{ url_for('static',filename='./css/font-awesome.css') }}">
+<script src="//cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.0.52/wavesurfer.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 </head>
 
 <body>
+
+
+
+<div id="header">
+
+  <span class="flexbox">
+    <label class="switch">
+      <input type="checkbox" id="audioWaveToggle">
+      <div class="slider"  id="audioWaveLabelToggle"></div>
+    </label>
+    <span>audioWave</span>
+  </span>
+
+  <span class="flexbox">
+    <label class="switch" >
+      <input type="checkbox" id="frequencyToggle">
+      <div class="slider" id="frequencyLabelToggle"></div>
+    </label>
+    <span>Frequency</span>
+  </span>
+
+  <span class="flexbox">
+    <label class="switch" >
+      <input type="checkbox" id="spectrogramToggle">
+      <div class="slider" id="spectrogramLabelToggle"></div>
+    </label>
+    <span>Spectrogram</span>
+  </span>
+
+</div>
 <div id="completeContainer">
+  <div style="width:100%;">
+    <div id="audioWave">
+      <div id="waveform"></div>
+    </div>
+  </div>
+  <div>
+    <div id="waveform"></div>
+  </div>
   <div style="width:100%">
     {% if name %}
         <h1 style="text-align: center">{{name}}.wav</h1>
@@ -24,14 +65,14 @@
     {% endif %}
 
     <div id="audioMenuContainer">
-      <i id="playButton" class="fa-play fa-2" aria-hidden="true"></i>
+      <i id="playButton" class="fa fa-play fa-2" aria-hidden="true" style="font-size:35px; height:40px"></i>
       <div id="sliderContainer">
         <div id="colorBar">
         </div>
         <input class='type2' type="range" id="sliderEnd" min=0 max=1000 value="1000">
         <input type="range" id="sliderStart" min=0 max=1000 value="0"> <!--this should be the first one so you can diretly select where the play headers going to start -->
       </div>
-      <i id="volumeButton" class="fa-volume-up fa-2" aria-hidden="true"></i>
+      <i id="volumeButton" class="fa fa-volume-up fa-2" aria-hidden="true" style="font-size:35px; height:40px"></i>
     </div>
   </div>
   {% include 'button.html' %}
@@ -61,7 +102,9 @@ input[type=range] {
 <progress value="1534602" max="4603807">33%</progress>
 -->
 
-<script src="{{ url_for('static',filename='javascript.js') }}"></script>
-<script src="{{ url_for('static',filename='events.js') }}"></script>
+<script src="{{ url_for('static',filename='./javascript/globalVar.js') }}"></script>
+<script src="{{ url_for('static',filename='./javascript/javascript.js') }}"></script>
+<script src="{{ url_for('static',filename='./javascript/events.js') }}"></script>
+<script src="{{ url_for('static',filename='./javascript/vis.js') }}"></script>
 </body>
 </html>

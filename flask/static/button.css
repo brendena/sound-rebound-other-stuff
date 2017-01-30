@@ -1,4 +1,4 @@
-button, label, input[type="submit"] {
+button, .labelToggleButton, input[type="submit"] {
     font-family: 'Segoe UI', 'Open Sans', Arial, sans-serif;
     display: block;
     color: rgb(255, 255, 255);
@@ -17,18 +17,18 @@ button, label, input[type="submit"] {
     float:left;
 }
 
-button:hover, label:hover,input[type="submit"]:hover{
+button:hover, .labelToggleButton:hover,input[type="submit"]:hover{
     background: #00ff00;
 }
 
-button:active, label:active,input[type="submit"]:active {
+button:active, .labelToggleButton:active,input[type="submit"]:active {
     background: #F6A953;
 }
 
 input[type="radio"]{ 
     display:none;
 } 
-input[type="radio"]:checked+label{ 
+input[type="radio"]:checked+.labelToggleButton{ 
     background: #00ff00; 
 } 
 

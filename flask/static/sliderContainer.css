@@ -1,4 +1,4 @@
-input{
+input[type=range]{
     position:absolute;
     height: 0px;
 }

@@ -29,7 +29,7 @@ def index():
 	if request.method == 'POST':
 		print("this is amazing")
 		print(request.form)
-		print(request.form['amount'])
+		print(request.form['status'])
 	'''
 	else:
 		returns = request.method

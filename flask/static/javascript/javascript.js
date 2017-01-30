@@ -1,6 +1,4 @@
-var sliderStart = document.getElementById("sliderStart")
-var sliderEnd = document.getElementById("sliderEnd")
-var colorBar = document.getElementById("colorBar")
+
 
 sliderStart.onchange = function(value){
     changeSlider();
@@ -34,35 +32,3 @@ var generateColor = function(start,end){
 
 
 
-window.onload = function(){
-    changeSlider();
-};
-
-
-var audio = document.getElementById("audio");
-
-var playButton = document.getElementById("playButton");
-
-var volumeButton = document.getElementById("volumeButton");
-
-
-playButton.addEventListener("click", function(){
-    if(audio.paused == true){
-        audio.play();
-    }
-    else{
-        audio.pause();
-    }
-});
-
-
-volumeButton.addEventListener("click", function(){
-    var inc = .2;
-    if(audio.volume + inc > 1){
-        audio.volume = 0;
-    }
-    else{
-        audio.volume += inc;
-    }
-    console.log("volume" + audio.volume);
-});

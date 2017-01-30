@@ -1,6 +1,8 @@
 body{
     width:100%;
     height:100%;
+    margin:0;
+    padding:0
 }
 #completeContainer{
     display:flex; 
@@ -40,4 +42,23 @@ body{
 
 audio{
     display:none;
+}
+
+#header{
+    background: black; 
+    position:fixed;
+    height:8%; 
+    width: 100%;
+    z-index:5; 
+    display:flex;
+    flex-direction: row;
+    align-items: center; 
+    justify-content: space-around; 
+    color: white
+}
+
+span.flexbox{
+    display:flex;
+    align-items: center;
+    text-transform: uppercase; 
 }
