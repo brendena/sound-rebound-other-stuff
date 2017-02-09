@@ -4,15 +4,15 @@
 
 2.  probable put like limites on the for what can go in the input
 
-
+style="display:none"
 -->
-<div style="display:none">
+<div id="form" style="display:none">
 <form  method="post" >
   <label for="accountName">Account Name:</label><br>
   <input id="accountName" type="text" name="accountName" required><br>
 
   <label for="accountEmail">Email:</label><br>
-  <input id="accountEmail" type="text" name="accountEmail" required><br>
+  <input id="accountEmail" type="email" name="accountEmail" required><br>
 
   <label for="password">Password:</label><br>
   <input id="password" type="password" name="password" required><br>
@@ -20,6 +20,7 @@
   <input type="submit" value="Submit">
 </form> 
 
+<!--
 {% if accountName %}
     <h1>{{accountName}}</h1>
     <h1>{{accountEmail}}</h1>
@@ -28,6 +29,8 @@
 {% else %}
     <h1>no submit</h1>
 {% endif %}
+-->
+
 </div>
 
 <!--

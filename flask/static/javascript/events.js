@@ -9,33 +9,7 @@ sliderStart.addEventListener("keypress", function(event){
 });
 */
 
-window.onload = function(){
-    changeSlider();
-};
 
-
-
-
-playButton.addEventListener("click", function(){
-    if(audio.paused == true){
-        audio.play();
-    }
-    else{
-        audio.pause();
-    }
-});
-
-
-volumeButton.addEventListener("click", function(){
-    var inc = .2;
-    if(audio.volume + inc > 1){
-        audio.volume = 0;
-    }
-    else{
-        audio.volume += inc;
-    }
-    console.log("volume" + audio.volume);
-});
 
 
 clipHereButton.addEventListener("click", function(event){
@@ -59,8 +33,6 @@ clipHereButton.addEventListener("click", function(event){
 	console.log(returnObject["section"])
 });
 
-
-var form = $(this).closest('form');
 
 submitButton.addEventListener("click", function(event){
     document.getElementById("clippedSection").value = JSON.stringify(returnObject.section)

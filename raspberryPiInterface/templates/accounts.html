@@ -1,10 +1,24 @@
-<div class="account">
+<div class="account" onclick="clicked(this)">
     <div class="accountName">
         accounts name
         <i class="fa fa-trash-o" aria-hidden="true"></i>
     </div>
     <div class="accountId">
-        account id
+        Email - {{ account.email }}
+    </div>
+    <div>
+        list current notifications
     </div>
     <i class="fa fa-angle-down" aria-hidden="true" style="text-align: center;"></i>
+    <div class="accountDetails" style="display:none">
+        {% if account.notifications %}
+            {% for notification in account.notifications %}
+                <p>{{notification.name}}
+                {% if notification.disabledNotification == True %}
+                    <span>- Disabled</span>
+                {% endif %}
+                </p>
+            {% endfor %}
+        {% endif%}
+    </div>
 </div>

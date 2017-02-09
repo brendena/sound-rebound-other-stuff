@@ -11,15 +11,24 @@
 </head>
 
 <body>
+
 <header id="header">sound-rebound</header>
 
   <div id="bodyContent">
-    {% include 'accounts.html'%}
-    {% include 'accounts.html'%}
+
+    {% if accounts %}
+      {% for account in accounts %}
+        {% include 'accounts.html'%}
+      {% endfor %}
+    {% endif %}
+
+    
     {% include 'form.html'%}
   </div>
-  <button>add a account</button>
+  <button class="button" id="addAccount">add a account</button>
 <footer id="footer">footer</footer>
+
+<script src="{{ url_for('static',filename='./javascript/javascript.js') }}"></script>
 <!--
   
 {% if name %}
@@ -29,7 +38,7 @@
   <h1>There was a problem</h1>
 {% endif %}
 
-<script src="{{ url_for('static',filename='./javascript/vis.js') }}"></script>
+
 
 
 
