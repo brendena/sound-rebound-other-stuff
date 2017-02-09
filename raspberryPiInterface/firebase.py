@@ -19,7 +19,7 @@ class myFirebase:
         
     #log a user into firebase
     # return userId and userToken else 0,0
-    def login(self,email,password):
+    def loginAccount(self,email,password):
         try:
             user = self.auth.sign_in_with_email_and_password(email,password)
             
@@ -35,7 +35,7 @@ class myFirebase:
             print(e)
         return 0,0
     
-    def getLoopingAccountInfo(self):
+    def getFlasksAccountInfo(self):
         print("looping through everthing")
         returnArray = []
         for i in self.allUsersData:
@@ -63,9 +63,11 @@ class myFirebase:
         SID = message['stream_id']
         
         path = str(message["path"]).replace("/",  "")
+        #if first object
         if(message["path"]  == "/"):
             print("initial object")
             self.allUsersData[SID]  = message["data"]
+        #if data exists
         elif self.allUsersData[SID].get(path):
             if(message["data"] == None):
                 print("deleting")
@@ -86,16 +88,17 @@ class myFirebase:
     #just a wrapper to set up the stream function
     def setUpStream(self,userId,userToken, email):
         self.db.child("users").child(userId).stream(self.streamHandler, token=userToken, stream_id=email)
+        
     #this will loop through all the accounts and set up stream functions
     def getAllAccountInfo(self):
-        userId, userToken = self.login(myEmail['email'],myEmail['password'])
+        userId, userToken = self.loginAccount(myEmail['email'],myEmail['password'])
         print(userId)
         if(userId != 0):
             self.setUpStream(userId,userToken,myEmail['email'])
-        userId, userToken = self.login('brendne.adamczak@mymail.champlain.edu','password')
-        print(userId)
-        if(userId != 0):
-            self.setUpStream(userId,userToken,'brendne.adamczak@mymail.champlain.edu')
+        #userId, userToken = self.loginAccount('brendne.adamczak@mymail.champlain.edu','password')
+        #print(userId)
+        #if(userId != 0):
+        #    self.setUpStream(userId,userToken,'brendne.adamczak@mymail.champlain.edu')
         
         
     #loads all the users accounts and passwords
@@ -103,21 +106,34 @@ class myFirebase:
         try:
             data = pickle.load( open( "./password.pickle", "rb+" ) )
         except:
-            data =[]
+            data = {}
         return data
     #saves all users accounts and passwords
     def saveAccountInfo(self, data):
         pickle.dump(data, open("./password.pickle", "wb+"))
+        
+    def addUser(self, account,password):
+        ifPass, otherValue = self.loginAccount(account,password)
+        error = "no error"
+        if(ifPass != 0):
+            data = self.loadAccountInfo()
+            print("\n\nthis is data\n")
+            print(data)
+            print(account)
+            if (account in data):
+                error = "alread here \n"
+            else:
+                data[account] = password
+                self.saveAccountInfo(data)
+        else:
+            error = "error\n"
+
+        print(error)
+        print(ifPass)
+        
+        return error 
 
 
-#
-
-#db.child("test").push({"test": "data"}, user['idToken'])
-
-#localId = auth.get_account_info(user['idToken'])['users'][0]['localId']
-
-
-#print(localId)
 
 
 

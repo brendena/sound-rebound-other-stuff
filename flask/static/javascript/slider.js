@@ -6,26 +6,74 @@ sliderStart.onchange = function(value){
 sliderEnd.onchange = function(value){
     changeSlider();
 }
+var updateSliderPostion = function(){
+
+    sliderStart.value = mapToSlider(this.GlobalRegion.start)
+    sliderEnd.value = mapToSlider(this.GlobalRegion.end)
+      
+    changeSlider();
+}
+
+var updatingRegionPosition = function(){
+    this.GlobalRegion.start = 0;
+    //WaveSurfer.Region.updateRender().bind(WaveSurfer)
+    chnageSlider();
+}
 
 var changeSlider = function(){
-    var gradientStyle = generateColor(sliderStart.value,sliderEnd.value );
+    var gradientStyle = generateColorString();
     colorBar.style = gradientStyle;
 }
 
-var generateColor = function(start,end){
+var generateColorString = function(){
+    var myArray = [];
+    if(typeof  wavesurfer.regions != "undefined"){
+        for (var key in wavesurfer.regions.list) {
+            if (wavesurfer.regions.list.hasOwnProperty(key)) {
+                myArray.push(wavesurfer.regions.list[key]);
+            }
+        };
+    }
+    /*
+    [
+        {"start": 55,
+            "end": 70},
+        {"start": 33,
+            "end": 45},
+        
+    ];
+    */
+    console.log(myArray)
     var colorA = "#D3D3D3";
     var colorB = "#ff595c";
+    var colorC = "DDAACC";
+
+
+    returnString = "background: linear-gradient(to right," +
+                                          colorA + " 0%,";
     
-    var pointA = (start / 10) + "%";
-    var pointB = (end / 10) + "%";
-    console.log(pointA + " " + pointB);
-    return "background: linear-gradient(to right," +
-                                          colorA + " 0%," +
-                                          colorA + " " + pointA + "," +
-                                          colorB + " " + pointA + "," +
-                                          colorB + " " + pointB + "," +
-                                          colorA + " " + pointB + "," +
-                                          colorA + " 100%);";
+    for(var i = 0; i < myArray.length; i++){
+        var smallestTmp = myArray[i];
+        for(var j = i+1; j < myArray.length; j++){
+            if(myArray[j].start < smallestTmp.start){
+                //print("swapping")
+                //print(myArray[i])
+                //print(myArray[j])
+                smallestTmp = myArray[j];
+                myArray[j] = myArray[i]
+                myArray[i] = smallestTmp;
+            }
+        }
+    }   
+    for(var i =0; i < myArray.length; i++){
+        returnString += colorA + " " + mapToHundred(myArray[i].start) + "%," + //
+                        colorB + " " + mapToHundred(myArray[i].start) + "%," +
+                        colorB + " " + mapToHundred(myArray[i].end) + "%," +
+                        colorA + " " + mapToHundred(myArray[i].end) + "%,";
+    }
+
+    returnString += colorA + " 100%);";
+    return returnString;
 }
 
 

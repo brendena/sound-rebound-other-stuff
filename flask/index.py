@@ -5,7 +5,6 @@ from flask import request
 app = Flask(__name__)
 
 
-
 #detectors
 @app.route("/test/", methods=['GET', 'POST'])
 def hello():

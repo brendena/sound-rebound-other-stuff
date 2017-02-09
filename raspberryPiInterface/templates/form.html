@@ -8,9 +8,7 @@ style="display:none"
 -->
 <div id="form" style="display:none">
 <form  method="post" >
-  <label for="accountName">Account Name:</label><br>
-  <input id="accountName" type="text" name="accountName" required><br>
-
+  
   <label for="accountEmail">Email:</label><br>
   <input id="accountEmail" type="email" name="accountEmail" required><br>
 
@@ -20,16 +18,16 @@ style="display:none"
   <input type="submit" value="Submit">
 </form> 
 
-<!--
-{% if accountName %}
-    <h1>{{accountName}}</h1>
+
+{% if accountEmail %}
     <h1>{{accountEmail}}</h1>
+    </br>
     <h1>{{password}}</h1>
 
 {% else %}
     <h1>no submit</h1>
 {% endif %}
--->
+
 
 </div>
 

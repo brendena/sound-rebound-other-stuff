@@ -2,7 +2,8 @@ body{
     width:100%;
     height:100%;
     margin:0;
-    padding:0
+    padding:0;
+    overflow:hidden;
 }
 #completeContainer{
     display:flex; 
@@ -61,4 +62,8 @@ span.flexbox{
     display:flex;
     align-items: center;
     text-transform: uppercase; 
+}
+
+#wave-spectrogram > spectrogram > canvas{
+    width:100%;
 }
