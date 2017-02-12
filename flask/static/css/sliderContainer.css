@@ -1,8 +1,3 @@
-input[type=range]{
-    position:absolute;
-    height: 0px;
-}
-
 #sliderStart {
     left:-1px;
     top:-9px;

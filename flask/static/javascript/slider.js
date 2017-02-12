@@ -80,12 +80,14 @@ var generateColorString = function(){
 
 
 playButton.addEventListener("click", function(){
-    if(audio.paused == true){
-        audio.play();
-    }
-    else{
-        audio.pause();
-    }
+    console.log(wavesurfer.isPlaying())
+        
+    console.log("is playing")
+
+    toggleAudio()
+    wavesurfer.playPause();
+
+    
 });
 
 
@@ -99,3 +101,14 @@ volumeButton.addEventListener("click", function(){
     }
     console.log("volume" + audio.volume);
 });
+var toggleAudio = function(){
+    if(wavesurfer.isPlaying()){
+        playButton.classList.remove("fa-pause")
+        playButton.classList.add("fa-play") 
+        
+    }
+    else{
+        playButton.classList.remove("fa-play")
+        playButton.classList.add("fa-pause") 
+    }
+}

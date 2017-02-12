@@ -21,14 +21,6 @@ wavesurfer.on('ready', function () {
         container: '#waveform-timeline'
     });
 });
-/*only fires when object get fired
-
-wavesurfer.on('region-created', function(region){
-    console.log(wavesurfer)
-    console.log(wavesurfer.regions.list) 
-
-})
-*/
 
 // how to use events
 //https://wavesurfer-js.org/docs/events.html
@@ -39,7 +31,14 @@ wavesurfer.on('region-click', function(region){
     console.log(region.id) 
     console.log(region)
     console.log(map(region.start,0,audioElement.duration, 0,100 ))
-    updateCurrentRegion(region)
+    if(wavesurfer.isPlaying()){
+        wavesurfer.playPause();
+    }
+    else{
+        region.playLoop();
+    }
+    toggleAudio()
+    
 });
 
 
@@ -67,6 +66,7 @@ var updateCurrentRegion = function(region){
 }
 
 //'https://ia902606.us.archive.org/35/items/shortpoetry_047_librivox/song_cjrg_teasdale_64kb.mp3'
+console.log(audioElement.src)
 wavesurfer.load(audioElement.src);
 
 document.getElementById('zoomSlider').onchange = function () {
