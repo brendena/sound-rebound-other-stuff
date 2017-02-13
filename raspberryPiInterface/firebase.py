@@ -1,32 +1,46 @@
 import pyrebase
-import pickle
 import requests
 import sys
 import time
 from myAuth import  config
-from myAuth import myEmail 
 
 class myFirebase:
+    '''
+    pupose 
+        initilase firebase
+        log in with my cred's
+        intinize the datebase
+        
+        Attributes Variables
+            allUserData - basicall all the data of the users that are log in
+            
+        
+    '''
     def __init__(self):
         self.firebase = pyrebase.initialize_app(config)
         self.auth = self.firebase.auth()
         self.db = self.firebase.database()
+        self.Streams = {}
 
-        self.passwordLocation = "./password.pickle"
+        
         self.allUsersData = {}
-        
-        self.getAllAccountInfo()
-        
-    #log a user into firebase
-    # return userId and userToken else 0,0
+    '''
+    log a user into firebase
+    
+        OUTPUT
+            userId and userToken 
+            else 0,0
+            
+            
+    '''
     def loginAccount(self,email,password):
         try:
             user = self.auth.sign_in_with_email_and_password(email,password)
             
             localId = self.auth.get_account_info(user['idToken'])['users'][0]['localId']
             return localId, user['idToken']
-        #bad password
-        #or bad log in.    
+        
+        #bad password, or bad log in.    
         except requests.exceptions.HTTPError as e:
             print(e)
             
@@ -34,31 +48,18 @@ class myFirebase:
             e = sys.exc_info()
             print(e)
         return 0,0
-    
-    def getFlasksAccountInfo(self):
-        print("looping through everthing")
-        returnArray = []
-        for i in self.allUsersData:
-            listNotification = []
-            for j in self.allUsersData[i]:
-                listNotification.append({
-                    "name":self.allUsersData[i][j]["name"],
-                    "disabledNotification":self.allUsersData[i][j]["disabledNotification"]
-                })
-            returnArray.append({
-                "email": i,
-                "notifications": listNotification
-            })
-    
-                
-        return returnArray
 
+    ''' 
+    Gets called every time firebase gets updated
+    
+        OUTPUT
+            Adds all values to allUsersData
+            
+            
+    '''
     def streamHandler(self,message):
         print("got a update")
-        #print("event: " + str(message["event"]))
-        #print("path: " + str(message["path"]))
         print("steam_id: " + str(message["stream_id"]))
-        #print("data: " + str(message["data"]))
         
         SID = message['stream_id']
         
@@ -80,61 +81,45 @@ class myFirebase:
             print("is a new thing")
             time.sleep(2)
             self.allUsersData[SID][path] = message["data"]
-        #print("\n everthing \n")
-        #print(self.allUsersData)
         
         
-
-    #just a wrapper to set up the stream function
+    '''
+        just a wrapper to set up the stream function
+        
+        
+    '''
     def setUpStream(self,userId,userToken, email):
-        self.db.child("users").child(userId).stream(self.streamHandler, token=userToken, stream_id=email)
+        self.Streams[email] = self.db.child("users").child(userId).stream(self.streamHandler, token=userToken, stream_id=email)
+    
+    def removeStream(self,email):
+        del self.Streams[email]
+        del self.allUsersData[email]
+    '''
+        this will loop through all the accounts and set up stream functions
         
-    #this will loop through all the accounts and set up stream functions
-    def getAllAccountInfo(self):
-        userId, userToken = self.loginAccount(myEmail['email'],myEmail['password'])
+        
+    '''
+    def getAllAccountInfo(self,allUsers):
+        for user in allUsers: 
+            #                                    "email", "password
+            userId, userToken = self.loginAccount(user,allUsers[user])
+            print(userId)
+            print("!!! this is email !!!")
+            print(user)
+            if(userId != 0):            #user is the email
+                self.setUpStream(userId,userToken,user)
+                
+    def addUserToAccountInfo(self, email,password):
+        userId, userToken = self.loginAccount(email,password)
         print(userId)
-        if(userId != 0):
-            self.setUpStream(userId,userToken,myEmail['email'])
-        #userId, userToken = self.loginAccount('brendne.adamczak@mymail.champlain.edu','password')
-        #print(userId)
-        #if(userId != 0):
-        #    self.setUpStream(userId,userToken,'brendne.adamczak@mymail.champlain.edu')
+        print("!!! this is email !!!")
+        print(email)
+        if(userId != 0):            
+            self.setUpStream(userId,userToken,email)
+    
+
         
         
-    #loads all the users accounts and passwords
-    def loadAccountInfo(self):
-        try:
-            data = pickle.load( open( "./password.pickle", "rb+" ) )
-        except:
-            data = {}
-        return data
-    #saves all users accounts and passwords
-    def saveAccountInfo(self, data):
-        pickle.dump(data, open("./password.pickle", "wb+"))
-        
-    def addUser(self, account,password):
-        ifPass, otherValue = self.loginAccount(account,password)
-        error = "no error"
-        if(ifPass != 0):
-            data = self.loadAccountInfo()
-            print("\n\nthis is data\n")
-            print(data)
-            print(account)
-            if (account in data):
-                error = "alread here \n"
-            else:
-                data[account] = password
-                self.saveAccountInfo(data)
-        else:
-            error = "error\n"
-
-        print(error)
-        print(ifPass)
-        
-        return error 
-
-
-
 
 
     

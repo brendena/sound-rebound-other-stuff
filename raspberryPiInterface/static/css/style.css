@@ -69,3 +69,11 @@ body{
 .accountId{
    
 }
+
+.deleteButton{
+    display:flex;
+    width:100%;
+    max-width:30px;
+    justify-content:center;
+    align-items: center;
+}

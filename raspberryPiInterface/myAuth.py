@@ -5,8 +5,3 @@ config = {
     "storageBucket": "sound-rebound.appspot.com",
     "messagingSenderId": "52771064904"
 }
-
-myEmail = {
-	"email" : "brendena@rjshs.net",
-	"password" : "password"
-}
